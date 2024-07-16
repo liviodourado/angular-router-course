@@ -1,12 +1,13 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "../services/auth.guard";
 import { CourseComponent } from "./course/course.component";
 import { HomeComponent } from "./home/home.component";
 import { LessonDetailComponent } from "./lesson/lesson-detail.component";
 import { LessonsListComponent } from "./lessons-list/lessons-list.component";
 import { courseResolver } from "./services/course.resolver";
-import { LessonsResolver } from "./services/lessons.resolver";
 import { LessonDetailResolver } from "./services/lesson-detail.resolver";
+import { LessonsResolver } from "./services/lessons.resolver";
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
   {
     path: ":courseUrl",
     component: CourseComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: "",
